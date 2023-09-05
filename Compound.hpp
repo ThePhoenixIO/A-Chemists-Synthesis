@@ -6,16 +6,17 @@ protected:
     const char* name;
     const char* formula;
     double molarMass;
+	
 public:
     compound();
 	compound(const char* compoundName, const char* compoundFormula, double compoundMolarMass);
     
     // setter methods
-	bool setName(const char* compoundName);
-	bool setFormula(const char* compoundFormula);
-	bool setMolarMass(double compoundMolarMass);
+	int setName(const char* compoundName);
+	int setFormula(const char* compoundFormula);
+	int setMolarMass(double compoundMolarMass);
 	
-    bool setCompound(const char* compoundName, const char* compoundFormula = "UNDEFINED", double compoundMolarMass = -1);
+    int setCompound(const char* compoundName, const char* compoundFormula = "UNDEFINED", double compoundMolarMass = -1);
 };
 
 compound::compound()
@@ -32,32 +33,32 @@ compound::compound(const char* compoundName, const char* compoundFormula, double
 	molarMass = compoundMolarMass;
 }
 
-bool compound::setName(const char* compoundName)
+int compound::setName(const char* compoundName)
 {
 	name = compoundName;
 
-	return true;
+	return 0;
 }
 
-bool compound::setFormula(const char* compoundFormula)
+int compound::setFormula(const char* compoundFormula)
 {
 	formula = compoundFormula;
 
-	return true;
+	return 0;
 }
 
-bool compound::setMolarMass(double compoundMolarMass)
+int compound::setMolarMass(double compoundMolarMass)
 {
 	molarMass = compoundMolarMass;
 	
-	return true;
+	return 0;
 }
 
-bool compound::setCompound(const char* compoundName, const char* compoundFormula = "UNDEFINED", double compoundMolarMass = -1)
+int compound::setCompound(const char* compoundName, const char* compoundFormula = "UNDEFINED", double compoundMolarMass = -1)
 {
 	name = compoundName;
 	formula = compoundFormula;
 	molarMass = compoundMolarMass;
     
-	return true;
+	return 0;
 }
