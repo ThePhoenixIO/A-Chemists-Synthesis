@@ -18,12 +18,24 @@
     <ClInclude Include="Compound.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Reactant.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StartingMaterial.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Product.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Reagent.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Reagent.hpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
