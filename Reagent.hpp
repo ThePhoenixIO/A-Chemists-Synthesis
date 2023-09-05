@@ -8,16 +8,21 @@ protected:
 	double mol;
 	double mmol;
 	float eq;
+
+	bool isReagent;
+	bool isProduct;
 	
 public:
 	reagent();
-	reagent(double reagentMV, double reagentMOL, float reagentEQ);
+	reagent(double reagentMV, double reagentMOL, float reagentEQ, const char* flag = "reagent");
 
-	bool setMV(double reagentMV);
-	bool setMOL(double reagentMOL);
-	bool setEQ(float reagentEQ);
+	int setMV(double reagentMV);
+	int setMOL(double reagentMOL);
+	int setEQ(float reagentEQ);
 
-	bool setReagent(double reagentMV, double reagentMOL = -1, float reagentEQ = -1);
+	int setFlag(const char* flag = "reagent");
+
+	int setReagent(double reagentMV, double reagentMOL = -1, float reagentEQ = -1, const char* flag = "reagent");
 };
 
 reagent::reagent()
@@ -26,45 +31,78 @@ reagent::reagent()
 	mol = -1;
 	mmol = mol / 1000;
 	eq = -1;
+	
+	isReagent = false;
+	isProduct = false;
 }
 
-reagent::reagent(double reagentMV, double reagentMOL, float reagentEQ)
+reagent::reagent(double reagentMV, double reagentMOL, float reagentEQ, const char* flag = "reagent")
 {
 	mv = reagentMV;
 	mol = reagentMOL;
 	mmol = mol / 1000;
 	eq = reagentEQ;
+
+	setFlag(flag);
 }
 
-bool reagent::setMV(double reagentMV)
+int reagent::setMV(double reagentMV)
 {
 	mv = reagentMV;
 	
-	return true;
+	return 0;
 }
 
-bool reagent::setMOL(double reagentMOL)
+int reagent::setMOL(double reagentMOL)
 {
 	mol = reagentMOL;
 	mmol = mol / 1000;
 	
-	return true;
+	return 0;
 }
 
-bool reagent::setEQ(float reagentEQ)
+int reagent::setEQ(float reagentEQ)
 {
 	eq = reagentEQ;
 
-	return true;
+	return 0;
 }
 
-bool reagent::setReagent(double reagentMV, double reagentMOL, float reagentEQ)
+int reagent::setFlag(const char* flag)
+{
+	if (flag == "reagent")
+	{
+		isReagent = true;
+
+		return 0;
+	}
+	if (flag == "product")
+	{
+		isProduct = true;
+		
+		return 0;
+	}
+	else
+	{
+		return 1;
+	}
+}
+
+int reagent::setReagent(double reagentMV, double reagentMOL, float reagentEQ, const char* flag = "reagent")
 {
 	mv = reagentMV;
 	mol = reagentMOL;
 	mmol = mol / 1000;
 	eq = reagentEQ;
 
-	return true;
-}
+	int flagVal = setFlag(flag);
 
+	if (flagVal == 0)
+	{
+		return 0;
+	}
+	else
+	{
+		return flagVal;
+	}
+}
