@@ -2,15 +2,17 @@
 #include "Compound.hpp"
 #include "Reactant.hpp"
 
-class startingMateriale : public compound, reactant
+class startingMaterial : public compound, public reactant
 {
 public:
-	startingMateriale();
+	startingMaterial(const char* smName, const char* smFormula, double smMW, double smMV, const char* smMVU);
 
 private:
 
 };
 
-startingMateriale::startingMateriale()
+startingMaterial::startingMaterial(const char* smName, const char* smFormula, double smMW, double smMV, const char* smMVU)
 {
+	setCompound(smName, smFormula, smMW);
+	setReactant(smMV, smMVU, getMW(), 1);
 }
