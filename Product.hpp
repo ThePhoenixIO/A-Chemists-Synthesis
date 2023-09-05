@@ -2,7 +2,7 @@
 #include "Compound.hpp"
 #include "Reactant.hpp"
 
-class product  : public compound, public reactant
+class product  : public compound, reactant
 {
 private:
 	// Place holder for percent yield calculation
