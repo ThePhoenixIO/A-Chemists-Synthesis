@@ -1,36 +1,42 @@
 #pragma once
+#include<iostream>
 
 class compound
 {
 protected:
     const char* name;
     const char* formula;
-    double molarMass;
+    double molecularWeight;
 	
 public:
     compound();
-	compound(const char* compoundName, const char* compoundFormula, double compoundMolarMass);
+	compound(const char* compoundName, const char* compoundFormula, double compoundMW);
     
     // setter methods
 	int setName(const char* compoundName);
 	int setFormula(const char* compoundFormula);
-	int setMolarMass(double compoundMolarMass);
+	int setMW(double compoundMW);
 	
-    int setCompound(const char* compoundName, const char* compoundFormula = "UNDEFINED", double compoundMolarMass = -1);
+    int setCompound(const char* compoundName, const char* compoundFormula = "UNDEFINED", double compoundMW = -1);
+
+	int userSetCompound();
+
+	// getter methods
+	double getMW();
 };
 
 compound::compound()
 {
     name = "UNDEFINED";
     formula = "UNDEFINED";
-    molarMass = -1.0;
+	molecularWeight = -1.0;
 }
 
-compound::compound(const char* compoundName, const char* compoundFormula, double compoundMolarMass)
+compound::compound(const char* compoundName, const char* compoundFormula, double compoundMW)
 {
 	name = compoundName;
 	formula = compoundFormula;
-	molarMass = compoundMolarMass;
+	molecularWeight = compoundMW;
 }
 
 int compound::setName(const char* compoundName)
@@ -47,18 +53,43 @@ int compound::setFormula(const char* compoundFormula)
 	return 0;
 }
 
-int compound::setMolarMass(double compoundMolarMass)
+int compound::setMW(double compoundMW)
 {
-	molarMass = compoundMolarMass;
+	molecularWeight = compoundMW;
 	
 	return 0;
 }
 
-int compound::setCompound(const char* compoundName, const char* compoundFormula = "UNDEFINED", double compoundMolarMass = -1)
+int compound::setCompound(const char* compoundName, const char* compoundFormula = "UNDEFINED", double compoundMW = -1)
 {
 	name = compoundName;
 	formula = compoundFormula;
-	molarMass = compoundMolarMass;
+	molecularWeight = compoundMW;
     
 	return 0;
+}
+
+int compound::userSetCompound()
+{
+	char compoundName[100];
+	char compoundFormula[100];
+	double compoundMolarMass;
+
+	std::cout << "Enter the name of the compound: ";
+	std::cin >> compoundName;
+
+	std::cout << "Enter the formula of the compound: ";
+	std::cin >> compoundFormula;
+
+	std::cout << "Enter the molar mass of the compound: ";
+	std::cin >> compoundMolarMass;
+
+	setCompound(compoundName, compoundFormula, compoundMolarMass);
+
+	return 0;
+}
+
+double compound::getMW()
+{
+	return molecularWeight;
 }
