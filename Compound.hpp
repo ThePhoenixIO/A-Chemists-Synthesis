@@ -35,18 +35,21 @@ compound::compound(const char* compoundName, const char* compoundFormula, double
 bool compound::setName(const char* compoundName)
 {
 	name = compoundName;
+
 	return true;
 }
 
 bool compound::setFormula(const char* compoundFormula)
 {
 	formula = compoundFormula;
+
 	return true;
 }
 
 bool compound::setMolarMass(double compoundMolarMass)
 {
 	molarMass = compoundMolarMass;
+	
 	return true;
 }
 

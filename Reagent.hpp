@@ -11,9 +11,13 @@ protected:
 	
 public:
 	reagent();
+	reagent(double reagentMV, double reagentMOL, float reagentEQ);
 
-	reagent(double reagentMV, double reagentMMOL, float reagentEQ);
+	bool setMV(double reagentMV);
+	bool setMOL(double reagentMOL);
+	bool setEQ(float reagentEQ);
 
+	bool setReagent(double reagentMV, double reagentMOL = -1, float reagentEQ = -1);
 };
 
 reagent::reagent()
@@ -31,3 +35,36 @@ reagent::reagent(double reagentMV, double reagentMOL, float reagentEQ)
 	mmol = mol / 1000;
 	eq = reagentEQ;
 }
+
+bool reagent::setMV(double reagentMV)
+{
+	mv = reagentMV;
+	
+	return true;
+}
+
+bool reagent::setMOL(double reagentMOL)
+{
+	mol = reagentMOL;
+	mmol = mol / 1000;
+	
+	return true;
+}
+
+bool reagent::setEQ(float reagentEQ)
+{
+	eq = reagentEQ;
+
+	return true;
+}
+
+bool reagent::setReagent(double reagentMV, double reagentMOL, float reagentEQ)
+{
+	mv = reagentMV;
+	mol = reagentMOL;
+	mmol = mol / 1000;
+	eq = reagentEQ;
+
+	return true;
+}
+
