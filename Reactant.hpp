@@ -14,16 +14,16 @@ protected:
 
 public:
 	reactant();
-	reactant(double reactantMassVolume, const char* reactantMassVolumeUnit, compound* comp, float reactantEquivalents);
+	reactant(double reactantMassVolume, const char* reactantMassVolumeUnit, double mw, float reactantEquivalents);
 
 	// setter methods
 	int setMV(double reactantMassVolume, const char* reactantMassVolumeUnit);
 	int setMoles(double mw);
 	int setEquivalents(float reactantEquivalents);
 
-	int setReactant(double reactantMV, const char* reactantMassVolumeUnit, compound* comp, float reactantEquivalents);
+	int setReactant(double reactantMV, const char* reactantMassVolumeUnit, double mw, float reactantEquivalents);
 
-	int userSetReactant(compound* comp);
+	int userSetReactant(double mw);
 
 	// getter methods
 	double getMV();
@@ -43,12 +43,12 @@ reactant::reactant()
 	eq = -1.0;
 }
 
-reactant::reactant(double reactantMassVolume, const char* reactantMassVolumeUnit, compound* comp, float reactantEquivalents)
+reactant::reactant(double reactantMassVolume, const char* reactantMassVolumeUnit, double mw, float reactantEquivalents)
 {
 	mv = reactantMassVolume;
 	mvu = reactantMassVolumeUnit;
 	
-	setMoles(comp->getMW());
+	setMoles(mw);
 	
 	eq = reactantEquivalents;
 }
@@ -78,19 +78,19 @@ int reactant::setEquivalents(float reactantEquivalents)
 	return 0;
 }
 
-int reactant::setReactant(double reactantMV, const char* reactantMassVolumeUnit, compound* comp, float reactantEquivalents)
+int reactant::setReactant(double reactantMV, const char* reactantMassVolumeUnit, double mw, float reactantEquivalents)
 {
 	mv = reactantMV;
 	mvu = reactantMassVolumeUnit;
 
-	setMoles(comp->getMW());
+	setMoles(mw);
 
 	eq = reactantEquivalents;
 
 	return 0;
 }
 
-int reactant::userSetReactant(compound* comp)
+int reactant::userSetReactant(double mw)
 {
 	double reactantMV;
 	char reactantMassVolumeUnit[100];
@@ -105,7 +105,7 @@ int reactant::userSetReactant(compound* comp)
 	std::cout << "Enter the equivalents of the reactant: ";
 	std::cin >> reactantEquivalents;
 
-	setReactant(reactantMV, reactantMassVolumeUnit, comp, reactantEquivalents);
+	setReactant(reactantMV, reactantMassVolumeUnit, mw, reactantEquivalents);
 	
 	return 0;
 }
