@@ -36,7 +36,6 @@ public:
 
 reaction::reaction(startingMaterial* sm, product* p)
 {
-    // should I include this-> for my adressing of protected variables?
     this->reactionStartingMaterial = sm;
 
     this->reactionProudct = p;
