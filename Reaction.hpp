@@ -6,6 +6,9 @@
 #include"Product.hpp"
 #include"tabulate/tabulate.hpp"
 
+#ifndef REACTION
+#define REACTION
+
 class reaction
 {
 private:
@@ -92,3 +95,5 @@ void reaction::displayReaction()
 
     std::cout << reactionTable << std::endl;
 }
+
+#endif // !REACTION

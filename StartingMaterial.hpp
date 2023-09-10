@@ -2,6 +2,9 @@
 #include "Compound.hpp"
 #include "Reactant.hpp"
 
+#ifndef STARTING_MATERIAL
+#define STARTING_MATERIAL
+
 class startingMaterial : public compound, public reactant
 {
 public:
@@ -23,3 +26,5 @@ startingMaterial::startingMaterial(const char* smName, const char* smFormula, do
 	setCompound(smName, smFormula, smMW);
 	setReactant(smMV, smMVU, getMW(), 1);
 }
+
+#endif // !STARTING_MATERIAL

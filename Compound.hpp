@@ -1,6 +1,9 @@
 #pragma once
 #include<iostream>
 
+#ifndef COMPOUND
+#define COMPOUND
+
 class compound
 {
 protected:
@@ -114,3 +117,5 @@ double compound::getMW()
 {
 	return this->molecularWeight;
 }
+
+#endif // !COMPOUND

@@ -3,6 +3,9 @@
 #include"Reactant.hpp"
 #include"StartingMaterial.hpp"
 
+#ifndef REAGENT
+#define REAGENT
+
 class reagent : public compound, public reactant
 {
 public:
@@ -42,3 +45,5 @@ int reagent::setReagent(const char* massVolumeUnits, float reagentEquivalance, s
 
 	return 0;
 }
+
+#endif // !REAGENT

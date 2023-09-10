@@ -2,6 +2,9 @@
 #include "Compound.hpp"
 #include "Reactant.hpp"
 
+#ifndef PRODUCT
+#define PRODUCT
+
 class product  : public compound, public reactant
 {
 private:
@@ -58,3 +61,5 @@ int product::calculateProduct(reactant* startingMaterial)
 
 	return 0;
 }
+
+#endif // !PRODUCT

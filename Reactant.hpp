@@ -2,6 +2,9 @@
 #include<iostream>
 #include"Compound.hpp"
 
+#ifndef REACTANT
+#define REACTANT
+
 class reactant
 {
 protected:
@@ -139,3 +142,5 @@ float reactant::getEquivalents()
 {
 	return this->eq;
 }
+
+#endif // !REACTANT
