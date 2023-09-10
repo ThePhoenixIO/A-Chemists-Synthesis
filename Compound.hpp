@@ -13,32 +13,40 @@ public:
 	compound(const char* compoundName, const char* compoundFormula, double compoundMW);
     
     // setter methods
+	/*
 	int setName(const char* compoundName);
 	int setFormula(const char* compoundFormula);
 	int setMW(double compoundMW);
+	*/
 	
-    int setCompound(const char* compoundName, const char* compoundFormula = "UNDEFINED", double compoundMW = -1);
+    int setCompound(const char* compoundName, const char* compoundFormula, double compoundMW);
 
 	int userSetCompound();
 
 	// getter methods
+	const char* getName();
+	const char* getFormula();
 	double getMW();
 };
 
+// Constructors
+
 compound::compound()
 {
-    name = "UNDEFINED";
-    formula = "UNDEFINED";
-	molecularWeight = -1.0;
+    this->name = "UNDEFINED";
+    this->formula = "UNDEFINED";
+	this->molecularWeight = -1.0;
 }
 
 compound::compound(const char* compoundName, const char* compoundFormula, double compoundMW)
 {
-	name = compoundName;
-	formula = compoundFormula;
-	molecularWeight = compoundMW;
+	this->name = compoundName;
+	this->formula = compoundFormula;
+	this->molecularWeight = compoundMW;
 }
 
+// Setter Methods
+/* Methods for setting individual attributes
 int compound::setName(const char* compoundName)
 {
 	name = compoundName;
@@ -59,12 +67,13 @@ int compound::setMW(double compoundMW)
 	
 	return 0;
 }
+*/
 
 int compound::setCompound(const char* compoundName, const char* compoundFormula = "UNDEFINED", double compoundMW = -1)
 {
-	name = compoundName;
-	formula = compoundFormula;
-	molecularWeight = compoundMW;
+	this->name = compoundName;
+	this->formula = compoundFormula;
+	this->molecularWeight = compoundMW;
     
 	return 0;
 }
@@ -89,7 +98,19 @@ int compound::userSetCompound()
 	return 0;
 }
 
+// Getter Methods
+
+const char* compound::getName()
+{
+	return this->name;
+}
+
+const char* compound::getFormula()
+{
+	return this->formula;
+}
+
 double compound::getMW()
 {
-	return molecularWeight;
+	return this->molecularWeight;
 }
