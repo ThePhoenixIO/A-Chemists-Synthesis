@@ -187,10 +187,11 @@
     <ClInclude Include="Reactant.hpp" />
     <ClInclude Include="Reagent.hpp" />
     <ClInclude Include="StartingMaterial.hpp" />
+    <ClInclude Include="Reaction.hpp" />
+    <ClInclude Include="tabulate\tabulate.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="testMain.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

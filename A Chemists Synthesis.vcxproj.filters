@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Tabulate">
+      <UniqueIdentifier>{688786af-3281-40c3-b5a4-dadf7b3dea9f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Compound.hpp">
@@ -30,12 +33,15 @@
     <ClInclude Include="Reagent.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Reaction.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tabulate\tabulate.hpp">
+      <Filter>Tabulate</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="testMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
