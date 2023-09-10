@@ -18,7 +18,7 @@ public:
 
 	// setter methods
 	int setMV(double reactantMassVolume, const char* reactantMassVolumeUnit);
-	int setMoles(double mw);
+	int setMol(double moles);
 	int setEquivalents(float reactantEquivalents);
 
 	int setReactant(double reactantMV, const char* reactantMassVolumeUnit, double mw, float reactantEquivalents);
@@ -27,65 +27,68 @@ public:
 
 	// getter methods
 	double getMV();
+	const char* getMVU();
 	double getMol();
+	double getMMol();
+	float getEquivalents();
 };
 
-// Creators
+// Constructors
 
 reactant::reactant()
 {
-	mv = -1.0;
-	mvu = "NULL";
+	this->mv = -1.0;
+	this->mvu = "NULL";
 	
-	mol = -1.0;
-	mmol = -1.0;
+	this->mol = -1.0;
+	this->mmol = -1.0;
 	
-	eq = -1.0;
+	this->eq = -1.0;
 }
 
 reactant::reactant(double reactantMassVolume, const char* reactantMassVolumeUnit, double mw, float reactantEquivalents)
 {
-	mv = reactantMassVolume;
-	mvu = reactantMassVolumeUnit;
+	this->mv = reactantMassVolume;
+	this->mvu = reactantMassVolumeUnit;
 	
-	setMoles(mw);
+	setMol(mv / mw);
 	
-	eq = reactantEquivalents;
+	this->eq = reactantEquivalents;
 }
 
 // Setter Methods
 
 int reactant::setMV(double reactantMassVolume, const char* reactantMassVolumeUnit)
 {
-	mv = reactantMassVolume;
-	mvu = reactantMassVolumeUnit;
+	this->mv = reactantMassVolume;
+	this->mvu = reactantMassVolumeUnit;
 
 	return 0;
 }
 
-int reactant::setMoles(double mw)
+int reactant::setMol(double moles)
 {
-	mol = mv / mw;
-	mmol = mol * 1000;
+	this->mol = moles;
+	this->mmol = mol * 1000;
 
 	return 0;
 }
 
 int reactant::setEquivalents(float reactantEquivalents)
 {
-	eq = reactantEquivalents;
+	this->eq = reactantEquivalents;
 
 	return 0;
 }
 
 int reactant::setReactant(double reactantMV, const char* reactantMassVolumeUnit, double mw, float reactantEquivalents)
 {
-	mv = reactantMV;
-	mvu = reactantMassVolumeUnit;
+	this->mv = reactantMV;
+	this->mvu = reactantMassVolumeUnit;
 
-	setMoles(mw);
+	setMol(mv / mw);
 
-	eq = reactantEquivalents;
+	this->eq = reactantEquivalents;
 
 	return 0;
 }
@@ -114,10 +117,25 @@ int reactant::userSetReactant(double mw)
 
 double reactant::getMV()
 {
-	return mv;
+	return this->mv;
+}
+
+const char* reactant::getMVU()
+{
+	return this->mvu;
 }
 
 double reactant::getMol()
 {
-	return mol;
+	return this->mol;
+}
+
+double reactant::getMMol()
+{
+	return this->mmol;
+}
+
+float reactant::getEquivalents()
+{
+	return this->eq;
 }
