@@ -1,6 +1,6 @@
 #pragma once
 #include<iostream>
-#include"Compound.hpp"
+#include "Compound.hpp"
 
 #ifndef REACTANT
 #define REACTANT
@@ -17,29 +17,39 @@ protected:
 
 public:
 	reactant();
-	reactant(double reactantMassVolume, const char* reactantMassVolumeUnit, double mw, float reactantEquivalents);
+	reactant (compound* compoundInput);
+	reactant(compound* compoundInput, double reactantMassVolume, const char* reactantMassVolumeUnit, float reactantEquivalents);
+
+	compound* baseCompound;
 
 	// setter methods
+	int setCompound(compound* compoundInput);
 	int setMV(double reactantMassVolume, const char* reactantMassVolumeUnit);
 	int setMol(double moles);
 	int setEquivalents(float reactantEquivalents);
 
-	int setReactant(double reactantMV, const char* reactantMassVolumeUnit, double mw, float reactantEquivalents);
+	int setReactant(compound* compoundInput, double reactantMV, const char* reactantMassVolumeUnit, float reactantEquivalents);
 
-	int userSetReactant(double mw);
+	int userSetReactant(compound* compoundInput);
 
 	// getter methods
+	
 	double getMV();
 	const char* getMVU();
+
 	double getMol();
 	double getMMol();
+
 	float getEquivalents();
+
 };
 
 // Constructors
 
 reactant::reactant()
 {
+	this->baseCompound = nullptr;
+
 	this->mv = -1.0;
 	this->mvu = "NULL";
 	
@@ -49,17 +59,38 @@ reactant::reactant()
 	this->eq = -1.0;
 }
 
-reactant::reactant(double reactantMassVolume, const char* reactantMassVolumeUnit, double mw, float reactantEquivalents)
+reactant::reactant(compound* compoundInput)
 {
+	this->baseCompound = compoundInput;
+
+	this->mv = -1.0;
+	this->mvu = "NULL";
+	
+	this->mol = -1.0;
+	this->mmol = -1.0;
+	
+	this->eq = -1.0;
+}
+
+reactant::reactant(compound* compoundInput, double reactantMassVolume, const char* reactantMassVolumeUnit, float reactantEquivalents)
+{
+	this->baseCompound = compoundInput;
+
 	this->mv = reactantMassVolume;
 	this->mvu = reactantMassVolumeUnit;
 	
-	setMol(mv / mw);
+	setMol(mv / baseCompound->getMW());
 	
 	this->eq = reactantEquivalents;
 }
 
 // Setter Methods
+int reactant::setCompound(compound* compoundInput)
+{
+	this->baseCompound = compoundInput;
+
+	return 0;
+}
 
 int reactant::setMV(double reactantMassVolume, const char* reactantMassVolumeUnit)
 {
@@ -84,19 +115,21 @@ int reactant::setEquivalents(float reactantEquivalents)
 	return 0;
 }
 
-int reactant::setReactant(double reactantMV, const char* reactantMassVolumeUnit, double mw, float reactantEquivalents)
+int reactant::setReactant(compound* compoundInput, double reactantMV, const char* reactantMassVolumeUnit, float reactantEquivalents)
 {
+	this->baseCompound = compoundInput;
+
 	this->mv = reactantMV;
 	this->mvu = reactantMassVolumeUnit;
 
-	setMol(mv / mw);
+	setMol(mv / baseCompound->getMW());
 
 	this->eq = reactantEquivalents;
 
 	return 0;
 }
 
-int reactant::userSetReactant(double mw)
+int reactant::userSetReactant(compound* compoundInput)
 {
 	double reactantMV;
 	char reactantMassVolumeUnit[100];
@@ -111,7 +144,7 @@ int reactant::userSetReactant(double mw)
 	std::cout << "Enter the equivalents of the reactant: ";
 	std::cin >> reactantEquivalents;
 
-	setReactant(reactantMV, reactantMassVolumeUnit, mw, reactantEquivalents);
+	setReactant(compoundInput, reactantMV, reactantMassVolumeUnit, reactantEquivalents);
 	
 	return 0;
 }
