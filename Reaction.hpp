@@ -1,9 +1,9 @@
 #pragma once
 #include<vector>
 #include<string>
-#include"StartingMaterial.hpp"
+#include"startingOrProduct.hpp"
 #include"Reagent.hpp"
-#include"Product.hpp"
+#include"converter.hpp"
 #include"tabulate/tabulate.hpp"
 
 #ifndef REACTION
@@ -18,26 +18,51 @@ private:
 
     void clearBuffer(std::string buffer[]);
 
-protected:
-    startingMaterial* reactionStartingMaterial;
+public:
+    // Constructors
+    reaction(startingOrProduct* p);
+    reaction(startingOrProduct* sm, startingOrProduct* p);
 
-    product* reactionProudct;
+    // list pointers
+    reaction* next;
+
+    std::vector<reaction*> previousRxns;
+
+    void setNext(reaction* r);
+
+    void addPrevious(reaction* r);
+
+    void removePrevious(reaction* r);
+    
+    // Reaction Methods
+    int addReagent(reagent* r);
+
+    void displayReaction();
+
+    // Stoeichometry Maths
+    std::vector<startingOrProduct*> reactionInputs;
+    
+    int stoeichometry();
+
+    void addPotential(startingOrProduct* sop);
+
+    // Reaction Elements
+    startingOrProduct* reactionStartingMaterial;
+
+    startingOrProduct* reactionProudct;
 
     std::vector<reagent*> reactionReagents;
 
     int numberOfReagents = 0;
-
-public:
-    reaction(startingMaterial* sm, product* p);
-
-    int addReagent(reagent* r);
-
-    //int addReagents(std::vector<reagent*> reagentVector);
-
-    void displayReaction();
 };
 
-reaction::reaction(startingMaterial* sm, product* p)
+reaction::reaction(startingOrProduct* p)
+{
+    this->reactionStartingMaterial = nullptr;
+    this->reactionProudct = p;
+}
+
+reaction::reaction(startingOrProduct* sm, startingOrProduct* p)
 {
     this->reactionStartingMaterial = sm;
 
@@ -62,9 +87,9 @@ template<typename type>
 void reaction::generateBuffer(type* input, std::string buffer[])
 {
     clearBuffer(buffer);
-    buffer[0] = input->getName();
-    buffer[1] = input->getFormula();
-    buffer[2] = std::to_string(input->getMW());
+    buffer[0] = input->baseCompound->getName();
+    buffer[1] = input->baseCompound->getFormula();
+    buffer[2] = std::to_string(input->baseCompound->getMW());
     buffer[3] = std::to_string(input->getMV()) + input->getMVU();
     buffer[4] = std::to_string(input->getMMol());
     buffer[5] = std::to_string(input->getEquivalents());
@@ -79,7 +104,7 @@ void reaction::displayReaction()
     reactionTable.add_row({"Compound", "Formula", "MW", "M/V", "MMoles", "EQ"});
     
     // Staring Material Part of Table
-    generateBuffer<startingMaterial>(this->reactionStartingMaterial, tableBuffer);
+    generateBuffer<startingOrProduct>(this->reactionStartingMaterial, tableBuffer);
     reactionTable.add_row({tableBuffer[0], tableBuffer[1], tableBuffer[2], tableBuffer[3], tableBuffer[4], tableBuffer[5]});
 
     // Reagent Part of Table
@@ -90,10 +115,65 @@ void reaction::displayReaction()
     }
 
     // Product Part of Table
-    generateBuffer<product>(this->reactionProudct, tableBuffer);
+    generateBuffer<startingOrProduct>(this->reactionProudct, tableBuffer);
     reactionTable.add_row({tableBuffer[0], tableBuffer[1], tableBuffer[2], tableBuffer[3], tableBuffer[4], tableBuffer[5]});
 
     std::cout << reactionTable << std::endl;
+}
+
+void reaction::addPotential(startingOrProduct* sop)
+{
+    this->reactionInputs.insert(reactionInputs.end(), sop);
+}
+
+int reaction::stoeichometry()
+{
+    int length = reactionInputs.size();
+
+    int smIndex = 0;
+    for (int i = 0; i < length; i++)
+    {
+        if (reactionInputs[smIndex]->getMol() < reactionInputs[i]->getMol())
+        {
+            smIndex = i;
+        }
+    }
+    
+    this->reactionStartingMaterial = reactionInputs[smIndex];
+    reactionReagents.erase(reactionReagents.begin() + smIndex); // this isn't working as expected check with stratton
+    length--;
+
+    for (int i = 0; i < length; i++)
+    {
+        addReagent(convertReagent(reactionInputs[i]));
+    }
+
+    reactionProudct->calculateProcuct(reactionStartingMaterial->getMol(), reactionStartingMaterial->getMVU());
+
+    return 0;
+}
+
+void reaction::setNext(reaction* r)
+{
+    this->next = r;
+}
+
+void reaction::addPrevious(reaction* r)
+{
+    this->previousRxns.insert(previousRxns.end(), r);
+}
+
+void reaction::removePrevious(reaction* r)
+{
+    int length = this->previousRxns.size();
+    for (int i = 0; i < length; i++)
+    {
+        if (this->previousRxns[i] == r)
+        {
+            this->previousRxns.erase(previousRxns.begin() + i);
+            break;
+        }
+    }
 }
 
 #endif // !REACTION
