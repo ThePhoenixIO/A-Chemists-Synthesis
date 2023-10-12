@@ -1,49 +1,44 @@
 #pragma once
-#include"Compound.hpp"
 #include"Reactant.hpp"
-#include"StartingMaterial.hpp"
+#include"startingOrProduct.hpp"
 
 #ifndef REAGENT
 #define REAGENT
 
-class reagent : public compound, public reactant
+class reagent : public reactant
 {
 public:
 	reagent();
-	reagent(const char* reagentName, const char* reagentFormula, double reagentMW);
-	reagent(const char* reagentName, const char* reagentFormula, double reagentMW, 
-		startingMaterial* sm, float reagentEquivalance, const char* massVolumeUnits = "g");
+	reagent(compound* baseCompound);
+	reagent(compound* baseCompound, startingOrProduct* sop, float reagentEquivalance, const char* massVolumeUnits);
 
-	int setReagent(const char* massVolumeUnits, float reagentEquivalance, startingMaterial* sm);
+	int setReagent(startingOrProduct* sop, const char* massVolumeUnits, float reagentEquivalance);
 };
 
 reagent::reagent()
 {
-	setCompound("UNDEFINED", "UNDEFINED", -1);
-	setReactant(-1, "UNDEFINED", -1, -1);
+	setReactant(nullptr, -1, "UNDEFINED", -1);
 }
 
-reagent::reagent(const char* reagentName, const char* reagentFormula, double reagentMW)
+reagent::reagent(compound* baseCompound)
 {
-	setCompound(reagentName, reagentFormula, reagentMW);
+	setCompound(baseCompound);
 }
 
-reagent::reagent(const char* reagentName, const char* reagentFormula, double reagentMW, 
-	startingMaterial* sm, float reagentEquivalance, const char* massVolumeUnits = "g")
+reagent::reagent(compound* baseCompound, startingOrProduct* sop, float reagentEquivalance, const char* massVolumeUnits)
 {
-	setCompound(reagentName, reagentFormula, reagentMW);
-	setReagent(massVolumeUnits, reagentEquivalance, sm);
+	setCompound(baseCompound);
+	setReagent(sop, massVolumeUnits, reagentEquivalance);
 }
 
-int reagent::setReagent(const char* massVolumeUnits, float reagentEquivalance, startingMaterial* sm)
+int reagent::setReagent(startingOrProduct* sop, const char* massVolumeUnits, float reagentEquivalance)
 {
 	this->eq = reagentEquivalance;
-	setMol(sm->getMol() * reagentEquivalance);
+	setMol(sop->getMol() * reagentEquivalance);
 
-	this->mv = mol * molecularWeight;
+	this->mv = mol * baseCompound->getMW();
 	this->mvu = massVolumeUnits;
 
 	return 0;
 }
-
 #endif // !REAGENT
