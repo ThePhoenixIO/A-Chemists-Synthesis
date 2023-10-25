@@ -19,7 +19,6 @@ void mapInitilization() {
     compMap["CBZ-Leu-Leu-OH"] = new compound("CBZ-Leu-Leu-OH", "C20H30N2O5", 378.469);
     compMap["CBZ-Leu-Leu-N(O-CH3)CH3"] = new compound("CBZ-Leu-Leu-N(O-CH3)CH3", "C26H46N4O6", 534.698);
 }
-
 #endif // LOADXML
 
 #if false

@@ -15,7 +15,7 @@ compound* ZLLLWA = new compound("CBZ-Leu-Leu-N(O-CH3)CH3", "C26H46N4O6", 534.698
 #else
 compound* compoundLookup(const char* input)
 {
-	return compMap[input];
+	//return compMap[input];
 }
 #endif
 

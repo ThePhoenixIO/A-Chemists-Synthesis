@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/.vscode/launch.json
+/SM & Prod/Product.hpp
+/SM & Prod/StartingMaterial.hpp
+/tabulate/tabulate.hpp
