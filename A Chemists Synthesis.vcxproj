@@ -32,6 +32,7 @@
     <ProjectGuid>{3672395d-9944-4f3c-8f71-00f8eb18e62b}</ProjectGuid>
     <RootNamespace>AChemistsSynthesis</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>s</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -182,12 +183,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CommonCompounds.hpp" />
     <ClInclude Include="Compound.hpp" />
+    <ClInclude Include="converter.hpp" />
     <ClInclude Include="Product.hpp" />
     <ClInclude Include="Reactant.hpp" />
     <ClInclude Include="Reagent.hpp" />
     <ClInclude Include="StartingMaterial.hpp" />
     <ClInclude Include="Reaction.hpp" />
+    <ClInclude Include="startingOrProduct.hpp" />
+    <ClInclude Include="Synthesis.hpp" />
     <ClInclude Include="tabulate\tabulate.hpp" />
   </ItemGroup>
   <ItemGroup>
