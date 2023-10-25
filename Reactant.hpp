@@ -1,6 +1,7 @@
 #pragma once
 #include<iostream>
 #include "Compound.hpp"
+#include"CommonCompounds.hpp"
 
 #ifndef REACTANT
 #define REACTANT

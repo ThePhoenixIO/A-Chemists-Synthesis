@@ -21,12 +21,6 @@ void mapInitilization() {
 }
 #endif // LOADXML
 
-#if false
-compound* compLook(const char* input) {
-    auto it = compMap.find(input);
-    if (it != compMap.end()) {
-        return it->second;
-    }
-    return nullptr;
+compound* compLookup(const char* input) {
+    return compMap[input];
 }
-#endif

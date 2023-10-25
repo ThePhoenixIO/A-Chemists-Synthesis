@@ -1,6 +1,5 @@
 #pragma once
 #include<iostream>
-#include"CommonCompounds.hpp"
 
 #ifndef COMPOUND
 #define COMPOUND
