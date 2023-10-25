@@ -13,6 +13,8 @@ public:
 	reagent(compound* baseCompound, startingOrProduct* sop, float reagentEquivalance, const char* massVolumeUnits);
 
 	int setReagent(startingOrProduct* sop, const char* massVolumeUnits, float reagentEquivalance);
+
+	void calculateReagent(startingOrProduct* sm);
 };
 
 reagent::reagent()
@@ -40,5 +42,11 @@ int reagent::setReagent(startingOrProduct* sop, const char* massVolumeUnits, flo
 	this->mvu = massVolumeUnits;
 
 	return 0;
+}
+
+void reagent::calculateReagent(startingOrProduct* sm)
+{
+	setMol((sm->getMol() * this->eq));
+	this->mv = mol * baseCompound->getMW();
 }
 #endif // !REAGENT
