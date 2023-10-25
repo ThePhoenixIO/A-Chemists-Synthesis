@@ -1,10 +1,12 @@
 #pragma once
+#include<iostream>
 #include<vector>
 #include<string>
 #include"startingOrProduct.hpp"
 #include"Reagent.hpp"
 #include"converter.hpp"
 #include"tabulate/tabulate.hpp"
+#include<algorithm>
 
 #ifndef REACTION
 #define REACTION
@@ -60,13 +62,14 @@ reaction::reaction(startingOrProduct* p)
 {
     this->reactionStartingMaterial = nullptr;
     this->reactionProudct = p;
+    this->next = nullptr;
 }
 
 reaction::reaction(startingOrProduct* sm, startingOrProduct* p)
 {
     this->reactionStartingMaterial = sm;
-
     this->reactionProudct = p;
+    this->next = nullptr;
 }
 
 int reaction::addReagent(reagent* r)
@@ -130,24 +133,16 @@ int reaction::stoeichometry()
 {
     int length = reactionInputs.size();
 
-    int smIndex = 0;
-    for (int i = 0; i < length; i++)
-    {
-        if (reactionInputs[smIndex]->getMol() < reactionInputs[i]->getMol())
-        {
-            smIndex = i;
-        }
-    }
-    
+    auto smIndex = std::min_element(reactionInputs.begin(), reactionInputs.end(), [](startingOrProduct* a, startingOrProduct* b) {return a->getMol() < b->getMol(); }) - reactionInputs.begin();
     this->reactionStartingMaterial = reactionInputs[smIndex];
-    reactionReagents.erase(reactionReagents.begin() + smIndex); // this isn't working as expected check with stratton
+    reactionInputs.erase(reactionInputs.begin() + smIndex);
     length--;
 
     for (int i = 0; i < length; i++)
     {
-        addReagent(convertReagent(reactionInputs[i]));
+        addReagent(convertReagent(reactionInputs[i], reactionStartingMaterial));
     }
-
+    
     reactionProudct->calculateProcuct(reactionStartingMaterial->getMol(), reactionStartingMaterial->getMVU());
 
     return 0;
