@@ -21,10 +21,12 @@ private:
 
     void clearBuffer(std::string buffer[]);
 
+    int reactionID;
+
 public:
     // Constructors
-    reaction(startingOrProduct* p);
-    reaction(startingOrProduct* sm, startingOrProduct* p);
+    reaction(startingOrProduct* p, int ID = -1);
+    reaction(startingOrProduct* sm, startingOrProduct* p, int ID = -1);
 
     // list pointers
     reaction* next;
@@ -57,20 +59,26 @@ public:
     std::vector<reagent*> reactionReagents;
 
     int numberOfReagents = 0;
+
+    void setRID(int ID);
+
+    int  getRID();
 };
 
-reaction::reaction(startingOrProduct* p)
+reaction::reaction(startingOrProduct* p, int ID)
 {
     this->reactionStartingMaterial = nullptr;
     this->reactionProudct = p;
     this->next = nullptr;
+    this->reactionID = ID;
 }
 
-reaction::reaction(startingOrProduct* sm, startingOrProduct* p)
+reaction::reaction(startingOrProduct* sm, startingOrProduct* p, int ID)
 {
     this->reactionStartingMaterial = sm;
     this->reactionProudct = p;
     this->next = nullptr;
+    this->reactionID = ID;
 }
 
 int reaction::addReagent(reagent* r)
@@ -172,4 +180,13 @@ void reaction::removePrevious(reaction* r)
     }
 }
 
+void reaction::setRID(int ID)
+{
+    this->reactionID = ID;
+}
+
+int reaction::getRID()
+{
+    return this->reactionID;
+}
 #endif // !REACTION
