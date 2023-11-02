@@ -16,6 +16,12 @@
     <Filter Include="Tabulate">
       <UniqueIdentifier>{688786af-3281-40c3-b5a4-dadf7b3dea9f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Git Files">
+      <UniqueIdentifier>{d114792b-6599-48cc-af90-9215ba5e2c7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tinyxml2">
+      <UniqueIdentifier>{e90ab086-208c-465b-a3fd-ed57d4e85fac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Compound.hpp">
@@ -56,5 +62,18 @@
     <ClCompile Include="Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tinyxml2\tinyxml2.cpp">
+      <Filter>tinyxml2</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitmodules">
+      <Filter>Git Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="commonCompounds.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

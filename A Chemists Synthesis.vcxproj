@@ -187,8 +187,6 @@
     <ClInclude Include="Compound.hpp" />
     <ClInclude Include="converter.hpp" />
     <ClInclude Include="Product.hpp" />
-    <ClInclude Include="pugixml\src\pugiconfig.hpp" />
-    <ClInclude Include="pugixml\src\pugixml.hpp" />
     <ClInclude Include="Reactant.hpp" />
     <ClInclude Include="Reagent.hpp" />
     <ClInclude Include="StartingMaterial.hpp" />
@@ -199,7 +197,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="pugixml\src\pugixml.cpp" />
+    <ClCompile Include="tinyxml2\tinyxml2.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitmodules" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="commonCompounds.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
