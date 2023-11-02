@@ -2,11 +2,12 @@
 #include<iostream>
 #include<vector>
 #include<string>
+#include<algorithm>
+
 #include"startingOrProduct.hpp"
 #include"Reagent.hpp"
 #include"converter.hpp"
 #include"tabulate/tabulate.hpp"
-#include<algorithm>
 
 #ifndef REACTION
 #define REACTION
