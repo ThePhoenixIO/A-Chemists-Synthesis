@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commonCompounds>
+    <compound>
+        <name type="string">Boc-Leu-OH</name>
+        <formula type="string">C11H21NO4</formula>
+        <molecular_weight type="double">231.292</molecular_weight>
+    </compound>
+    <compound>
+        <name type="string">CBZ-Leu-Leu-OH</name>
+        <formula type="string">C20H30N2O5</formula>
+        <molecular_weight type="double">378.46899999999999</molecular_weight>
+    </compound>
+    <compound>
+        <name type="string">TFA-Leu-N(O-CH3)CH3</name>
+        <formula type="string">C10H18F3N2O3</formula>
+        <molecular_weight type="double">271.25999999999999</molecular_weight>
+    </compound>
+    <compound>
+        <name type="string">Boc-Leu-N(O-CH3)CH3</name>
+        <formula type="string">C13H26N2O4</formula>
+        <molecular_weight type="double">274.18900000000002</molecular_weight>
+    </compound>
+    <compound>
+        <name type="string">N,O-dimethylhydroxylamine</name>
+        <formula type="string">C8H17NO1</formula>
+        <molecular_weight type="double">97.540000000000006</molecular_weight>
+    </compound>
+    <compound>
+        <name type="string">DIPEA</name>
+        <formula type="string">C8H19N</formula>
+        <molecular_weight type="double">129.24000000000001</molecular_weight>
+    </compound>
+    <compound>
+        <name type="string">HOBt</name>
+        <formula type="string">C6H5N3O</formula>
+        <molecular_weight type="double">135.12</molecular_weight>
+    </compound>
+    <compound>
+        <name type="string">EDC</name>
+        <formula type="string">C8H17N3</formula>
+        <molecular_weight type="double">191.69999999999999</molecular_weight>
+    </compound>
+    <compound>
+        <name type="string">CBZ-Leu-Leu-N(O-CH3)CH3</name>
+        <formula type="string">C26H46N4O6</formula>
+        <molecular_weight type="double">534.69799999999998</molecular_weight>
+    </compound>
+</commonCompounds>
