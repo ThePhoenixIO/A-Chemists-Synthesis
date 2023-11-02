@@ -1,5 +1,8 @@
 #pragma once
 #include<iostream>
+#include<fstream>
+
+#include"tinyxml2/tinyxml2.h"
 
 #ifndef COMPOUND
 #define COMPOUND
