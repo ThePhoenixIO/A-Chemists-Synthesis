@@ -1,10 +1,9 @@
 #include"reaction.hpp"
 #include<string>
 
-#define TEST true
-#if TEST
-int main()
-{
+#define TEST 1
+#if TEST == 0
+int main() {
 	mapInitilization();
 	
 	startingOrProduct sm(compLookup("Boc-Leu-OH"), 10, "g");
@@ -42,9 +41,15 @@ int main()
 	secondTest.displayReaction();
 	return 0;
 }
+
+#elif TEST == 1
+int main() {
+	mapInitilization("commonCompounds.xml");
+	return 0;
+}
+
 #else
-int main()
-{
+int main() {
 	return 0;
 }
 #endif
