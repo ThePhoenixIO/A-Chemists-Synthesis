@@ -13,6 +13,7 @@ public:
     synthesis(reaction* p);
 
     std::vector<reaction*> startingPoints;
+    int numStartingPoints = 0;
 
     reaction* product;
 
@@ -20,7 +21,10 @@ public:
 
     void setProduct(reaction* r);
 
-    int calculateSynthesis();
+    // acceptible directions are "forward (f)" and "reverse (r)"
+    int calculateSynthesis(const char* direction = "forward");
+
+    //xml tree
 };
 
 synthesis::synthesis()
@@ -38,6 +42,7 @@ synthesis::synthesis(reaction* p)
 void synthesis::addStartingPoint(reaction* r)
 {
     startingPoints.insert(startingPoints.end(), r);
+    numStartingPoints++;
 }
 
 void synthesis::setProduct(reaction* r)
@@ -45,9 +50,21 @@ void synthesis::setProduct(reaction* r)
     product = r;
 }
 
-int synthesis::calculateSynthesis()
+int synthesis::calculateSynthesis(const char* direction)
 {
-    
+    if(direction == "forward" || direction == "f")
+    {
+        return 0;
+    }
+    else if(direction == "reverse" || direction == "r")
+    {
+        return 0;
+    }
+    else
+    {
+        std::cout << "Error: Invalid direction" << std::endl;
+        return 1;
+    }
 }
 
 #endif // !SYNTHESIS
