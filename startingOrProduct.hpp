@@ -1,10 +1,19 @@
 #pragma once
-//#include"Reagent.hpp"
 #include"Reactant.hpp"
 
 #ifndef STARTINGORPRODUCT
 #define STARTINGORPRODUCT
 
+// Debug compiler flag
+#define GETTERDEBUGFLAG 0
+/*
+* startingOrProduct class
+* reaction independent
+* This class is used to store the starting material or product of a reaction(s)
+* This class is a child of the reactant class which holds its protected variables
+* Accessable through
+* 1. All reaction objects that contain the starting material or product object
+*/
 class startingOrProduct : public reactant
 {
 public:
@@ -15,15 +24,16 @@ public:
 
     // setter methods
     int calculateProcuct(double mol, const char* mvuInput);
-
-    // getter methods
+    #if GETTERDEBUGFLAG
+    getter methods
 	double getMV();
-	const char* getMVU();
+	//const char* getMVU();
 
 	double getMol();
 	double getMMol();
 
 	float getEquivalents();
+    #endif // GETTERDEBUGFLAG#endif // GETTERDEBUGFLAG
 };
 
 // Constructors
@@ -43,7 +53,17 @@ startingOrProduct::startingOrProduct(compound* sop, double sopMV, const char* so
     setReactant(sop, sopMV, sopMVU, 1);
 }
 
-// Setter Methods
+/*
+* Method: calculateProcuct
+* Arguments[Starting material]: double mol, const char* mvuInput
+* Warnings: None
+* Description: This method is used to calculate the molecular weight of the product given starting material
+* Returns: 0 if successful
+* 
+* Todo: Add error checking
+* Todo: Add return codes
+* Todo: Add other fuction with sm input
+*/
 int startingOrProduct::calculateProcuct(double mol, const char* mvuInput)
 {
     setMol(mol);
@@ -53,6 +73,7 @@ int startingOrProduct::calculateProcuct(double mol, const char* mvuInput)
     return 0;
 }
 
+#if GETTERDEBUGFLAG
 // Getter Methods
 double startingOrProduct::getMV()
 {
@@ -78,5 +99,6 @@ float startingOrProduct::getEquivalents()
 {
 	return this->eq;
 }
+#endif // GETTERDEBUGFLAG
 
 #endif // !STARTINGORPRODUCT
