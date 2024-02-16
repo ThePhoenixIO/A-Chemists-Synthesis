@@ -1,13 +1,8 @@
 #pragma once
-#include <shlobj.h>
-#include <locale>
-
 #include "Reaction.hpp"
 
 #ifndef SYNTHESIS
 #define SYNTHESIS
-
-#define FILE 0
 
 /*
 * synthesis class
@@ -173,6 +168,7 @@ void synthesis::rxnTraversal(reaction* rootRxn, std::function<void()> altFunct)
 * Returns: Struct containing the pointer to start of longest path and the length of the path
 * Ask Stratton about returing a struct
 */
+
 synthesis::longestPath synthesis::findLongestPath()
 {
     // Synthesis valid check if invalid returns 1
@@ -184,7 +180,7 @@ synthesis::longestPath synthesis::findLongestPath()
     int currentPathLength = 0;
 
     // Initialization of longest path struct
-    longestPath path = { startingPoints[0], 0};
+    longestPath path = { startingPoints[0], 0 };
 
     for (int i = 0; i < numStartingPoints; i++)
     {
@@ -222,8 +218,7 @@ int synthesis::calculateSynthesis(const char* direction)
     // Check if there are starting points
     if (validSynthesis() == false) { return 1; }
 
-    //struct LP  = findLongestPath();
-    //int temp = findLongestPath();
+    longestPath LP = findLongestPath();
 
     // Calculate synthesis
     if(direction == "forward" || direction == "f")
@@ -254,7 +249,8 @@ int synthesis::calculateSynthesis(const char* direction)
 */
 int synthesis::saveSynthesis(const char* path)
 {
-}
+    pathReturn path = {};
 
+}
 
 #endif // !SYNTHESIS
