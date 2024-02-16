@@ -1,9 +1,8 @@
 #pragma once
-#include<iostream>
-#include<fstream>
 #include<unordered_map>
 
 #include"tinyxml2/tinyxml2.h"
+#include"utils.hpp"
 
 #ifndef COMPOUND
 #define COMPOUND
@@ -203,6 +202,8 @@ double compound::getMW()
 	return this->molecularWeight;
 }
 
+// Depricated code
+#if FALSE
 /*
 * Method: saveToXML
 * Arguments: tinyxml2::XMLDocument* doc, tinyxml2::XMLElement* baseNode
@@ -239,6 +240,7 @@ int compound::saveToXML(tinyxml2::XMLDocument* doc, tinyxml2::XMLElement* baseNo
 	
 	return 0;
 }
+#endif
 
 /*
 * Function: writeCompoundXML
@@ -248,7 +250,6 @@ int compound::saveToXML(tinyxml2::XMLDocument* doc, tinyxml2::XMLElement* baseNo
 * Returns: 0 on success
 * Todo: add return codes
 * Todo: add error handling
-* Todo: check and make path
 */
 int writeCompoundXML(const char* path, std::unordered_map<const char*, compound*>* map) {
 	// Create XML document
