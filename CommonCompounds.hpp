@@ -5,8 +5,11 @@
 std::unordered_map<const char*, compound*> commonCompMap;
 tinyxml2::XMLDocument commonCompoundXML;
 
+// Clean up file and remove depricated code
+
 #if LOADXML
 /*
+* TESTING ONLY DO NOT DEPLOY IN RELEASE
 * Function: initMap 
 * Arguments: none
 * Warnings: Hardcoded values
