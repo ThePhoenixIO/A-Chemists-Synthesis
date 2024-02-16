@@ -4,10 +4,12 @@
 #include<iostream>
 #include<fstream>
 
+#include "Synthesis.hpp"
+
 struct pathReturn
 {
     int errorCode;           // Error code indicating the result of the saveAsDialog function.
-    const char* filePath;    // File path selected by the user.
+    char* filePath;    // File path selected by the user.
 };
 
 //Following fucntions credit Microsoft documentation and Windows API documentation
@@ -163,4 +165,83 @@ pathReturn folderSelectionDialog()
     }
 
     CoUninitialize();
+}
+
+/*
+* Function: writeCompoundXML
+* Arguments: const char* path, std::unordered_map<const char*, compound*>* map
+* Warnings: map is a pointer!!!
+* Descriptiom: function for writing compound map to XML file
+* Returns: 0 on success
+* Todo: add return codes
+* Todo: add error handling
+*/
+int saveCompMap(const char* path, std::unordered_map<const char*, compound*>* map) {
+    // Create XML document
+    tinyxml2::XMLDocument compoundMap;
+
+    // Create and insert declaration
+    compoundMap.InsertFirstChild(compoundMap.NewDeclaration("xml version=\"1.0\" encoding=\"UTF-8\""));
+
+    // Create and insert base node
+    tinyxml2::XMLElement* xmlCompoundMap = compoundMap.NewElement("compound_map");
+
+    // initialize iterator [it]
+    auto it = map->begin();
+    tinyxml2::XMLElement* name = nullptr;
+    tinyxml2::XMLElement* formula = nullptr;
+    tinyxml2::XMLElement* molecularWeight = nullptr;
+    for (int n = 0; n < map->size(); n++, it++)
+    {
+        compound* comp = it->second;
+        tinyxml2::XMLNode* xmlCompound = compoundMap.NewElement("compound");
+
+        // Create, set, and insert name element
+        name = compoundMap.NewElement("name");
+        name->SetAttribute("type", "string");
+        name->SetText(comp->getName());
+        xmlCompound->InsertFirstChild(name);
+
+        // Create, set, and insert formula element
+        formula = compoundMap.NewElement("formula");
+        formula->SetAttribute("type", "string");
+        formula->SetText(comp->getFormula());
+        xmlCompound->InsertEndChild(formula);
+
+        // Create, set, and insert molecular weight element
+        molecularWeight = compoundMap.NewElement("molecular_weight");
+        molecularWeight->SetAttribute("type", "double");
+        molecularWeight->SetText(comp->getMW());
+        xmlCompound->InsertEndChild(molecularWeight);
+
+        xmlCompoundMap->InsertEndChild(xmlCompound);
+    }
+
+    // Insert base node into document
+    compoundMap.InsertEndChild(xmlCompoundMap);
+    compoundMap.SaveFile(path);
+
+    return 0;
+}
+
+/*
+* Method: saveSynthesis
+* Arguments: const char* path
+* Warnings: None
+* Description: Saves the synthesis to the given path
+* Returns: 0 if successful
+*/
+int saveSynthesis(std::string synthesisTitle)
+{
+    synthesisTitle = "/" + synthesisTitle;
+
+    pathReturn path = saveAsDialog();
+    if (path.errorCode != 0)
+	{
+		return -1;
+	}
+
+    std::string fullPath = path.filePath + synthesisTitle;
+
+    std::cout << fullPath << std::endl;
 }
