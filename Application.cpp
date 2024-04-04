@@ -1,4 +1,4 @@
-#include "synthesis.hpp"
+#include "Synthesis.hpp"
 #include <string>
 
 //wchar_t global_path;
@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
 
 	firstTest.displayReaction();
 
-	double temp = firstTest.reactionProudct->getMol() * compLookup("TFA-Leu-N(O-CH3)CH3")->getMW();
+	double temp = firstTest.reactionProduct->getMol() * compLookup("TFA-Leu-N(O-CH3)CH3")->getMW();
 
 	startingOrProduct r1_2(compLookup("CBZ-Leu-Leu-OH"), temp, "g");
 	startingOrProduct r2_2(compLookup("TFA-Leu-N(O-CH3)CH3"), 3.1, "g");
@@ -88,24 +88,7 @@ int main(int argc, char* argv[]) {
 
 #elif TEST == 3
 int main(int argc, char* argv[]) {
-	bool quit = false;
-	char* input = new char;
-	wchar_t path;
-	while (quit != true)
-	{
-		path = saveAsDialog(L"Test Dioluge Output");
-		std::cout << L"returned path: " << path << std::endl;
-		std::cout << L"Returned path: " << global_path << std::endl;
-		std::cout << "Would you like to quit? (y/n)" << std::endl;
-		std::cin >> input;
 
-		if (input == "y") {
-			quit = true;
-		}
-		else {
-			quit = false;
-		}
-	}
 	return 1;
 }
 #else
