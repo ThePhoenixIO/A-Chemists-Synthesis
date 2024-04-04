@@ -1,7 +1,6 @@
 #pragma once
-#include<iostream>
 #include "Compound.hpp"
-#include"CommonCompounds.hpp"
+#include "CommonCompounds.hpp"
 
 #ifndef REACTANT
 #define REACTANT
@@ -50,6 +49,7 @@ public:
 	int userSetReactant(compound* compoundInput);
 
 	// getter methods
+	const char* getCompName();
 	double getMV();
 	const char* getMVU();
 
@@ -243,6 +243,18 @@ int reactant::userSetReactant(compound* compoundInput)
 }
 
 // Getter Methods
+
+/*
+* Method: getComp
+* Arguments: None
+* Warnings: None
+* Description: Returns the name of the compound that the reactant is based on
+* Returns: const char* compoundName
+*/
+const char* reactant::getCompName()
+{
+	return this->baseCompound->getName();
+}
 
 /*
 * Method: getMV
