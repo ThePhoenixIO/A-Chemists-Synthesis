@@ -1,13 +1,7 @@
 #pragma once
-#include<iostream>
-#include<vector>
-#include<string>
-#include<algorithm>
-
 #include"startingOrProduct.hpp"
 #include"Reagent.hpp"
-#include"converter.hpp"
-#include"tabulate/tabulate.hpp"
+#include"utils.hpp"
 
 #ifndef REACTION
 #define REACTION
@@ -77,7 +71,7 @@ public:
     // Reaction Elements
     startingOrProduct* reactionStartingMaterial;
 
-    startingOrProduct* reactionProudct;
+    startingOrProduct* reactionProduct; 
 
     std::vector<reagent*> reactionReagents;
 
@@ -98,7 +92,7 @@ public:
 reaction::reaction(startingOrProduct* p, int ID)
 {
     this->reactionStartingMaterial = nullptr;
-    this->reactionProudct = p;
+    this->reactionProduct = p;
     this->nextReaction = nullptr;
     this->reactionID = ID;
 }
@@ -113,7 +107,7 @@ reaction::reaction(startingOrProduct* p, int ID)
 reaction::reaction(startingOrProduct* sm, startingOrProduct* p, int ID)
 {
     this->reactionStartingMaterial = sm;
-    this->reactionProudct = p;
+    this->reactionProduct = p;
     this->nextReaction = nullptr;
     this->reactionID = ID;
 }
@@ -242,7 +236,7 @@ int reaction::runReactionForward()
         reactionReagents[i]->calculateReagent(reactionStartingMaterial);
     }
     
-    reactionProudct->calculateProcuct(reactionStartingMaterial->getMol(), reactionStartingMaterial->getMVU());
+    reactionProduct->calculateProcuct(reactionStartingMaterial->getMol(), reactionStartingMaterial->getMVU());
     return 0;
 }
 
@@ -277,7 +271,7 @@ void reaction::displayReaction()
 
     // Product Part of Table
     // Generate table buffer for product and adds to table
-    generateBuffer<startingOrProduct>(this->reactionProudct, tableBuffer);
+    generateBuffer<startingOrProduct>(this->reactionProduct, tableBuffer);
     reactionTable.add_row({ tableBuffer[0], tableBuffer[1], tableBuffer[2], tableBuffer[3], tableBuffer[4], tableBuffer[5] });
 
     // Display Table
@@ -294,7 +288,7 @@ void reaction::displayReaction()
 const char* reaction::textDisplay()
 {
     std::string starting(reactionStartingMaterial->baseCompound->getName());
-    std::string product(reactionProudct->baseCompound->getName());
+    std::string product(reactionProduct->baseCompound->getName());
     std::string buffer = starting + " ---> " + product;
     return buffer.c_str();
 }
@@ -327,7 +321,7 @@ int reaction::stoeichometry()
     }
 
     // calculates the product
-    reactionProudct->calculateProcuct(reactionStartingMaterial->getMol(), reactionStartingMaterial->getMVU());
+    reactionProduct->calculateProcuct(reactionStartingMaterial->getMol(), reactionStartingMaterial->getMVU());
 
     return 0;
 }
